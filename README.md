@@ -3,5 +3,6 @@
 
 
 # Software Description:
+Ansible is a cross-platform tool for resource provisioning automation that can be used in combination with DevOps to make complex tasks easier to manage.
 
 # Software Creators:
