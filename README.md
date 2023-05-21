@@ -39,7 +39,7 @@ All the while, `ansible.errors` is checking for errors and exceptions that may o
 
 ### System Organization
 <figcaption align="center"> <b>A structure diagram of Ansible in UML component diagram format</b> </figcaption>
-<img src="./img/uml_diagram.jpg"
+<img src="./img/system_organization_diagram.jpg"
 width=80% height=80%>
 <figcaption align="center"> <b>Figure 2: UML Component Diagram for Ansible</b> </figcaption>
 
