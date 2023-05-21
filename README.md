@@ -4,10 +4,10 @@
 # Context & Background  
 
 ## Software Description:
-Ansible is a cross-platform tool for resource provisioning automation that can be used in combination with DevOps to make complex tasks easier to manage.A few of the tasks it can automate includes installing software, provisioning infastructure, improving security and complience and sharing automation.
+Ansible is a cross-platform tool for resource provisioning automation that can be used in combination with DevOps to make complex tasks easier to manage. A few of the tasks it can automate includes installing software, provisioning infastructure, improving security and complience and sharing automation.
 
 ## Software Creators:
-Created by Michael Dehann and it was later acquired by Red Hat in 2015. Red Hat continues to maintain sensible and is a fairly mid sized with approximately 19,00 employees. 
+Created by Michael Dehann and it was later acquired by Red Hat in 2015. Red Hat continues to maintain Ansible and is a fairly mid sized company with approximately 19,000 employees. 
 
 # Development View
 Ansible playbook execution overview:
