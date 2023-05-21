@@ -27,17 +27,21 @@ Created by Michael Dehann and it was later acquired by Red Hat in 2015. Red Hat 
 # Architectural Assessment 
 ## 1. Separation of Concerns
 Ansible’s architecture adheres to this principle at a high level of abstraction through layer cohesion, as each of the modules are grouped together by their responsibility. This is exemplified under the `module_utils / facts ` package where data is collected to then be used in playbook execution. Under this are the following packages:
-hardware
+
+* `hardware`
 * `network`
 * `other`
 * `system`
 * `virtual`
+
 Each package is then further broken up into modules based on different concerns such as the hardware package that deals with data related to hardware systems. The hardware system contains the following modules:
+
 * `aix.py`
 * `base.py`
 * `darwin.py`
 * `dragonfly.py`
 * …
+
 Ansible is broken up into distinct categories and maintains high cohesion so the the system is easier to maintain and improve. At a higher level Ansible is able to follow this principle but when analyzing at a code-level of abstraction it fails to adhere to this principle. In the AIXHardware class, it does have different methods for retrieving facts such as `get_cpu_facts`, `get_memory_facts`, and `get_dmi_facts`. But in the `populate` method it then combines the results from these methods into `hardware_facts.` To achieve separation of concerns would be better to further break up the code so that each is retrieving a specific type of hardware information. 
 
 
