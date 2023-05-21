@@ -30,12 +30,18 @@ All the while, `ansible.errors` is checking for errors and exceptions that may o
 | Component | Role & Relationship | Description |
 | --------------------- | ------- | -------------------------- |
 | Module_utils | Module Development. Used by the ansible playbook. | Provides utility modules which contain common functions and classes that can be used by module developers. Includes modules for handling command execution, working with files, and managing services. |
-| Executer | Task execution. Depends on Module_utils.common. | Enables task execution and module invocation. Involves modules for task execution and management. |
-| Module_utils.common | Module management | Common utility modules for working with test, URLs, locales, and other tasks. |
+| Executor | Task execution. Depends on Module_utils.common. Uses playbook, module_utils.facts, errors, and config. | Enables task execution and module invocation. Involves modules for task execution and management. |
 | Module_utils.facts | Module discovery. Used by ansible.playbook | Involves gathering facts and system information from remote hosts. |
-| Playbook | Playbook development, depends on ansible.module_utils.facts | This package involves modules that work with Ansible playbooks. Allows for parsing, validating, and executing playbooks. |
-| Config | Inventory management. | Provides modules for reading inventory files, manipulating host and group data, generating dynamic inventories, and playbook execution actions. |
-| Errors | Error handling. Used by the Playbook. | Handles all errors raised by Ansible code. Returns the line in the file corresponding to the error and causes and suggested solutions for the error. |
+| Playbook | Playbook development. Depends on ansible.module_utils.facts. Uses inventory and module_utils. | This package involves modules that work with Ansible playbooks. Allows for parsing, validating, and executing playbooks. |
+| Config | Handles configuration settings. | Ensures the desired configuration settings. Consulted whenever needed during the execution process.  |
+| Inventory | Inventory management. Used by playbook. | Provides modules for reading inventory files, manipulating host and group data, generating dynamic inventories, and playbook execution actions. |
+| Errors | Error handling. Used by the Executor | Handles all errors raised by Ansible code. Returns the line in the file corresponding to the error and causes and suggested solutions for the error. |
+
+### System Organization
+<figcaption align="center"> <b>A structure diagram of Ansible in UML component diagram format</b> </figcaption>
+<img src="./img/uml_diagram.jpeg"
+width=80% height=80%>
+<figcaption align="center"> <b>Figure 2: UML Component Diagram for Ansible</b> </figcaption>
 
 # Applied Perspective
 
