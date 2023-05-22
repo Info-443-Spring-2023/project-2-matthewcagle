@@ -7,7 +7,12 @@
 Ansible is a cross-platform tool for resource provisioning automation that can be used in combination with DevOps to make complex tasks easier to manage. A few of the tasks it can automate includes installing software, provisioning infastructure, improving security and complience and sharing automation.
 
 ## Software Creators:
-Created by Michael Dehann and it was later acquired by Red Hat in 2015. Red Hat continues to maintain Ansible and is a fairly mid sized company with approximately 19,000 employees. 
+Created by Michael Dehann and it was later acquired by Red Hat in 2015. Red Hat continues to maintain Ansible and is a fairly mid sized company with approximately 19,000 employees. There are currently contributions from 5,000 users and there ongoing commits being made to the repository.
+
+## More information 
+[Official Github](https://github.com/ansible/ansible/tree/devel) |
+[Developer Guide](https://docs.ansible.com/ansible/devel/dev_guide/) |
+[How Ansible Works](https://www.ansible.com/overview/how-ansible-works) |
 
 # Development View
 Ansible playbook execution overview:
