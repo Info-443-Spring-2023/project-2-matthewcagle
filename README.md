@@ -55,13 +55,14 @@ width=80% height=80%>
 ## Design Patterns:
 
 Found in multiple components, but started in ansible/lib/ansible/module/blockinfile.py
-Module pattern: The entire code is encapsulated within a Python module. The purpose of a module is to organize code in a logical way, which makes the code easier to understand and use. In the code, all functions and the main execution are encapsulated within a single script.
 
-Strategy pattern: The use of this pattern is visible in the handling of different strategies for inserting blocks of text. Depending on whether the "insertbefore" or "insertafter" parameter is used, the script employs a different strategy for determining the position of the block.
+**Module pattern**: The entire code is encapsulated within a Python module. The purpose of a module is to organize code in a logical way, which makes the code easier to understand and use. In the code, all functions and the main execution are encapsulated within a single script.
 
-Template Method pattern: The main() function acts as a template method. This design pattern defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. In the Ansible code, the main function sets up some parameters and the flow of execution, but the specific behavior is implemented in helper functions like write_changes and check_file_attrs. This is true in majority components in modules. 
+**Strategy pattern**: The use of this pattern is visible in the handling of different strategies for inserting blocks of text. Depending on whether the "insertbefore" or "insertafter" parameter is used, the script employs a different strategy for determining the position of the block.
 
-Singleton pattern: This pattern restricts instantiation of a class to a single instance, and provides a global point of access to it. In the script, the AnsibleModule instance could be considered a kind of singleton since only one is created per execution of the script
+**Template Method pattern**: The main() function acts as a template method. This design pattern defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. In the Ansible code, the main function sets up some parameters and the flow of execution, but the specific behavior is implemented in helper functions like write_changes and check_file_attrs. This is true in majority components in modules. 
+
+**Singleton pattern**: This pattern restricts instantiation of a class to a single instance, and provides a global point of access to it. In the script, the AnsibleModule instance could be considered a kind of singleton since only one is created per execution of the script
 
 
 # Architectural Assessment 
