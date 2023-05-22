@@ -49,6 +49,14 @@ width=80% height=80%>
 <figcaption align="center"> <b>Figure 2: UML Component Diagram for Ansible</b> </figcaption>
 
 # Applied Perspective
+A system's resource owners can regulate who has access to which resources by using a set of procedures and tools known as security. The individuals, pieces of software, and other entities that make up the who are referred to as the group of system actors with a security identity. Resources are the delicate parts of the system, such as subsystems, data items, and activities, to which access must be controlled. Both the requirement that access be confined to principals the system is aware of and the actions that system principals will legitimately wish to do (such as reading, changing, or executing them) are referred to as "access to the resources" in this context.
+
+The security of your systems, your data, and the data of your customers is of the utmost importance. As stated under Ansible website for their security policy, you’re able to create a secure component of your system using Ansible’s playbook syntax. That syntax can be applied to custom security policies, configuring firewall rules, and restricting specific users and groups. Security information and event management (SIEM) systems are used to collect and analyze security incidents. Ansible provides developers with programmatic access to a range of data sources, giving security analysts the most up-to-date information possible to assess scenarios.
+
+Some of the concerns in regards to Ansible security system is that it doesn’t require a single target login name. It indicates that administrators aren’t permitted to use a personal account on each target server and have a sudo access with passwords.This is important since you can now see who performed what in the logs and you won't need a single anonymous super user. Another smart security measure that should be taken into conversation for Ansible is to steer clear of names like admin and ansible when generating admin accounts. If the username is easy to guess, an attacker is already halfway to gaining access to your automated orchestration tool. You must select identifications that can be tracked and connected to a particular individual. After that, it is the owner's obligation to keep this username secure. As a result, your audit logs will expand, making it easier to locate and pinpoint the source of any issues down the roads.
+
+In conclusion, the security of your Ansible automation can be readily increased by utilizing Ansible to vary your accessibility using targeted and traceable usernames. Even though Ansible uses SSH, it is largely hands-off once automation is up and going. In other words, if your sensitive data is not protected at the source, malicious hijacking may take place without your knowledge.
+
 
 # Identify Style & Patterns Used
 
