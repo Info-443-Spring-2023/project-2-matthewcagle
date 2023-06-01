@@ -48,6 +48,56 @@ All the while, `ansible.errors` is checking for errors and exceptions that may o
 width=80% height=80%>
 <figcaption align="center"> <b>Figure 2: UML Component Diagram for Ansible</b> </figcaption>
 
+### Dependencies
+
+| Library | Version |
+| ------- | ------- |
+| jinja2 | 3.0.0 or greater |
+| PyYAML | 5.1 or greater |
+| cryptography | Any |
+| packaging | Any |
+| importlib_resources | 5.0 or 5.1 |
+| resolvelib | Any between 0.5.3 and 1.1.0 |
+
+| Component | Dependencies |
+| --------- | ------------ |
+| module_utils | ansible.playbook |
+| ansible.executor | ansible.playbook, ansible.module_utils.facts, ansible.errors, ansible.config |
+| ansible.module_utils.facts | ansible.module_utils |
+| ansible.playbook | Ansible.inventory, module_utils, ansible.module_utils.facts |
+| ansible.config | |
+| ansible.inventory | |
+| ansible.errors | |
+
+### Codeline Model 
+<figcaption align="center"> <b>A codeline model of Ansible</b> </figcaption>
+<img src="./img/source_code_diagram.jpg"
+width=50% height=50%>
+<figcaption align="center"> <b>Figure 3: Source Code Structure for Ansible</b> </figcaption>
+
+### Testing & Configuration 
+Testing takes place using Azure Pipelines. Ansible has the following categories for testing:
+| Type | Description | 
+| ---- | ----------- |
+| Sanity Tests | Scripts and tools used to perform static code analysis. Ensures Ansible coding standards and requirements |
+| Integration Tests | Functional tests and Ansible core functionality |
+| Unit Tests | Tests against individual parts of the code base |
+
+#### Running Tests 
+Make sure you have a directory for Ansible, and then change directories.
+`cd ansible-pr-testing`
+Find the pull request that you are testing and make note of its number.
+`os.path.sep / #554`
+Create a branch for testing and use the pull request number when fetching proposed changes.
+`git fetch origin refs/pull/XXXX/head:testing_PRXXXX
+git checkout testing_PRXXXX`
+Rather than having to install all the dependencies, Ansible includes a script that allows you to use Ansible without a full installation.
+`source ./hacking/env-setup`
+The commands for different types of tests. 
+`ansible-test sanity`
+`ansible-test units`
+`ansible-test integration -v ping`
+
 # Applied Perspective
 A system's resource owners can regulate who has access to which resources by using a set of procedures and tools known as security. The individuals, pieces of software, and other entities that make up the who are referred to as the group of system actors with a security identity. Resources are the delicate parts of the system, such as subsystems, data items, and activities, to which access must be controlled. Both the requirement that access be confined to principals the system is aware of and the actions that system principals will legitimately wish to do (such as reading, changing, or executing them) are referred to as "access to the resources" in this context.
 
