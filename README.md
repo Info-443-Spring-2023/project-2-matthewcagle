@@ -50,6 +50,7 @@ width=80% height=80%>
 
 ### Dependencies
 
+#### External Library Dependencies
 | Library | Version |
 | ------- | ------- |
 | jinja2 | 3.0.0 or greater |
@@ -59,6 +60,7 @@ width=80% height=80%>
 | importlib_resources | 5.0 or 5.1 |
 | resolvelib | Any between 0.5.3 and 1.1.0 |
 
+#### Component Dependencies 
 | Component | Dependencies |
 | --------- | ------------ |
 | module_utils | ansible.playbook |
@@ -72,7 +74,7 @@ width=80% height=80%>
 ### Codeline Model 
 <figcaption align="center"> <b>A codeline model of Ansible</b> </figcaption>
 <img src="./img/source_code_diagram.jpg"
-width=50% height=50%>
+width=100% height=100%>
 <figcaption align="center"> <b>Figure 3: Source Code Structure for Ansible</b> </figcaption>
 
 ### Testing & Configuration 
@@ -85,15 +87,24 @@ Testing takes place using Azure Pipelines. Ansible has the following categories 
 
 #### Running Tests 
 Make sure you have a directory for Ansible, and then change directories.
+
 `cd ansible-pr-testing`
+
 Find the pull request that you are testing and make note of its number.
+
 `os.path.sep / #554`
+
 Create a branch for testing and use the pull request number when fetching proposed changes.
-`git fetch origin refs/pull/XXXX/head:testing_PRXXXX
-git checkout testing_PRXXXX`
+
+`git fetch origin refs/pull/XXXX/head:testing_PRXXXX`
+`git checkout testing_PRXXXX`
+
 Rather than having to install all the dependencies, Ansible includes a script that allows you to use Ansible without a full installation.
+
 `source ./hacking/env-setup`
+
 The commands for different types of tests. 
+
 `ansible-test sanity`
 `ansible-test units`
 `ansible-test integration -v ping`
