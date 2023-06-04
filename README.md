@@ -72,6 +72,8 @@ width=80% height=80%>
 | ansible.errors | |
 
 ### Codeline Model 
+Our Ansible project directory contains multiple repositories, including "ansible," "ansible-runner," "awx," and others. However, our primary focus is on the "ansible" repository. Within the "ansible" repository, the specific modules we are interested in are located under lib/ansible. These modules include: `inventory,` `errors,` `config,` `playbook,` `executor,` `module_utils,` and `module_utils_facts.`By narrowing our attention to these components we can better concentrate on the relevant aspects of our project.
+
 <figcaption align="center"> <b>A codeline model of Ansible</b> </figcaption>
 <img src="./img/source_code_diagram.jpg"
 width=80% height=80%>
@@ -151,7 +153,7 @@ This pattern restricts instantiation of a class to a single instance, and provid
 
 **Problem**: The `singleton.py` module provides a generic implementation of the Singleton Pattern which enforces that classes can only create one instance of themselves. The Singleton pattern is used in the `display.py` file to address the problem of multiple instances of the `Display` class being created and used throughout the application. The `Display` class deals with the handling the display of messages during the execution of Ansible tasks. 
 
-**Soultion**: By using the Singleton pattern, it enforces that there is only one instance of the `Display` class. This is essential as having multiple instances of the `Display` class could lead to inconsistencies and conflicts in displaying messages. With the implementation of SIngleton, Ansible can use the same instance of the `Display` class to provide a coordinated display of messages.
+**Soltion**: By using the Singleton pattern, it enforces that there is only one instance of the `Display` class. This is essential as having multiple instances of the `Display` class could lead to inconsistencies and conflicts in displaying messages. With the implementation of SIngleton, Ansible can use the same instance of the `Display` class to provide a coordinated display of messages.
 
 
 
@@ -184,4 +186,5 @@ The Single Responsibility Principle is a fundamental concept in software enginee
 
 The Principle of Least Knowledge, or the Law of Demeter, is a principle that promotes loose coupling in various software applications and architectures. According to this principle, an object should only communicate with its immediate neighbors and should not have knowledge about the inner workings of the encapsulated objects. We can see Ansible complies with this principle, because Ansible’s architecture largely abides through thee use of modules and its agentless nature. Ansible sends modules to the node machines but does not need to know the specific implementation details of these modules. All it needs to know is the overall interface, which is how to send them information and what output to expect. This means the internals of the modules and components remain encapsulated and the changes within them do not directly affect each other, and the control machine. Overall, this program largely adheres to the Principle of Least Knowledge, helping maintain low coupling and increasing maintainability. 
 
-
+# System Improvement
+System Repo Fork: https://github.com/emilyghale/ansible
