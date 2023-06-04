@@ -74,7 +74,7 @@ width=80% height=80%>
 ### Codeline Model 
 <figcaption align="center"> <b>A codeline model of Ansible</b> </figcaption>
 <img src="./img/source_code_diagram.jpg"
-width=100% height=100%>
+width=80% height=80%>
 <figcaption align="center"> <b>Figure 3: Source Code Structure for Ansible</b> </figcaption>
 
 ### Testing & Configuration 
@@ -106,7 +106,9 @@ Rather than having to install all the dependencies, Ansible includes a script th
 The commands for different types of tests. 
 
 `ansible-test sanity`
+
 `ansible-test units`
+
 `ansible-test integration -v ping`
 
 # Applied Perspective
@@ -135,7 +137,12 @@ Found in multiple components, but started in ansible/lib/ansible/module/blockinf
 
 **Template Method pattern**: The main() function acts as a template method. This design pattern defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. In the Ansible code, the main function sets up some parameters and the flow of execution, but the specific behavior is implemented in helper functions like write_changes and check_file_attrs. This is true in majority components in modules. 
 
-**Singleton pattern**: This pattern restricts instantiation of a class to a single instance, and provides a global point of access to it. In the script, the AnsibleModule instance could be considered a kind of singleton since only one is created per execution of the script
+### Singleton Pattern 
+This pattern restricts instantiation of a class to a single instance, and provides a global point of access to it. Singleton was identified under `utils` where it has been implemented with the `Display` class to ensure that any part of Ansible can obtain a reference to the single instance of `Display.`
+**Context**: ansible/lib/ansible/utils/singleton.py, ansible/lin/ansible/utils/display.py
+**Problem**: The `singleton.py` module provides a generic implementation of the Singleton Pattern which enforces that classes can only create one instance of themselves. The Singleton pattern is used in the `display.py` file to address the problem of multiple instances of the `Display` class being created and used throughout the application. The `Display` class deals with the handling the display of messages during the execution of Ansible tasks. 
+**Soultion**: By using the Singleton pattern, it enforces that there is only one instance of the `Display` class. This is essential as having multiple instances of the `Display` class could lead to inconsistencies and conflicts in displaying messages. With the implementation of SIngleton, Ansible can use the same instance of the `Display` class to provide a coordinated display of messages.
+
 
 
 # Architectural Assessment 
