@@ -199,6 +199,12 @@ The Principle of Least Knowledge, or the Law of Demeter, is a principle that pro
 # System Improvement
 System Repo Fork: https://github.com/emilyghale/ansible
 
+**Edits to ansible/lib/ansible/modules/get_url.py
+Location: Lines 392-435**:
+
+The original code had some readability issues because  to a lack of proper spacing, inconsistent variable naming, and missing comments. To address this, the code was reformatted to use Python coding conventions, including consistent indentation, proper spacing, and the use of docstrings to explain the purpose of the function. Error handling was improved by explicitly handling potential exceptions. The original code had a generic exception handler that removed the temporary file without providing detailed error messages. In the refactored code, exceptions are caught explicitly, allowing for more informative error messages that include the specific cause of the failure. File operations were simplified using the tempfile.NamedTemporaryFile context manager. This eliminates the need to manually open and close the temporary file, ensuring proper resource cleanup and reducing the risk of resource leaks. Additionally, the code was organized in a more logical and coherent manner, with related operations grouped together. This improves code maintainability and makes it easier to follow the flow of execution.
+
 
 **Edits to ansible/lib/ansible/modules/Find.py file line 257**:
+
 In this refactored version, the code eliminates the duplicated pattern matching logic and uses ‘any’ and list comprehensions to check for matches and exclusions. This change simplifies the code and improves its readability. The original code had separate checks for pattern matching and exclusion matching, leading to duplication. The refactored code combines these checks into a single block of code, resulting in a more streamlined and concise implementation. List comprehensions allow for concise construction of lists based on conditions, making it easier to understand the intent of the code. The refactored code separates the logic for glob pattern matching and regular expression matching using the use_regex flag. This separation makes the code more modular and allows for easier maintenance or extension in the future, following the separation of concerns principle. Overall, the refactored code improves the clarity, readability, and maintainability of the pfilter function.
