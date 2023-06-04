@@ -198,3 +198,6 @@ The Principle of Least Knowledge, or the Law of Demeter, is a principle that pro
 
 # System Improvement
 System Repo Fork: https://github.com/emilyghale/ansible
+
+**Edits to ansible/lib/ansible/modules/Find.py file line 257**
+In this refactored version, the code eliminates the duplicated pattern matching logic and uses ‘any’ and list comprehensions to check for matches and exclusions. This change simplifies the code and improves its readability. The original code had separate checks for pattern matching and exclusion matching, leading to duplication. The refactored code combines these checks into a single block of code, resulting in a more streamlined and concise implementation. List comprehensions allow for concise construction of lists based on conditions, making it easier to understand the intent of the code. The refactored code separates the logic for glob pattern matching and regular expression matching using the use_regex flag. This separation makes the code more modular and allows for easier maintenance or extension in the future, following the separation of concerns principle. Overall, the refactored code improves the clarity, readability, and maintainability of the pfilter function.
