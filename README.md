@@ -133,7 +133,7 @@ Ansible as a software tool follows a modular and decentralized architecture. Ans
 
 Found in multiple components, but started in ansible/lib/ansible/module/blockinfile.py
 
-### Module pattern: 
+### Module pattern
 The entire code is encapsulated within a Python module. The purpose of a module is to organize code in a logical way, which makes the code easier to understand and use. In the code, all functions and the main execution are encapsulated within a single script.
 
 **Problem**:
