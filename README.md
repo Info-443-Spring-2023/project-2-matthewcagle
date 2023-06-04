@@ -135,6 +135,16 @@ Found in multiple components, but started in ansible/lib/ansible/module/blockinf
 
 **Module pattern**: The entire code is encapsulated within a Python module. The purpose of a module is to organize code in a logical way, which makes the code easier to understand and use. In the code, all functions and the main execution are encapsulated within a single script.
 
+**Problem**:
+The Module Design Pattern aims to address the need for standardized and reusable components in Ansible. It solves the problem of having repetitive code for similar tasks and promotes modularity, maintainability, and code reusability. By applying this pattern, Ansible can provide a consistent and organized approach to implementing automation logic across different modules
+
+**Solution**:
+In the Ansible codebase, the Module Design Pattern is implemented by defining a base module class that acts as a template for module execution. This base class represents the skeleton of the automation process and provides a predefined set of steps that need to be executed in a particular order. The base module class typically includes methods for parameter validation, task execution, and etc.
+
+Specific modules within the ansible/lib/ansible/modules/ directory extend the base module class and implement their own functionality by overriding or extending the predefined methods. This allows individual modules to customize their behavior while adhering to the overall structure and guidelines provided by the base module class.
+
+By utilizing the Module Design Pattern, Ansible gets consistency and reusability in its codebase. This would enable developers to easily build upon existing modules and create new ones that follow the established patterns. This approach enhances maintainability and makes it easier to understand and extend the automation capabilities of Ansible.
+
 **Strategy pattern**: The use of this pattern is visible in the handling of different strategies for inserting blocks of text. Depending on whether the "insertbefore" or "insertafter" parameter is used, the script employs a different strategy for determining the position of the block.
 
 ### Template Method Pattern
