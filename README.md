@@ -135,7 +135,14 @@ Found in multiple components, but started in ansible/lib/ansible/module/blockinf
 
 **Strategy pattern**: The use of this pattern is visible in the handling of different strategies for inserting blocks of text. Depending on whether the "insertbefore" or "insertafter" parameter is used, the script employs a different strategy for determining the position of the block.
 
-**Template Method pattern**: The main() function acts as a template method. This design pattern defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. In the Ansible code, the main function sets up some parameters and the flow of execution, but the specific behavior is implemented in helper functions like write_changes and check_file_attrs. This is true in majority components in modules. 
+### Template Method Pattern
+**Context**: ansible/lib/ansible/modules/template.py
+The main() function acts as a template method. This design pattern defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. In the Ansible code, the main function sets up some parameters and the flow of execution, but the specific behavior is implemented in helper functions like write_changes and check_file_attrs. This is true in the majority of components in the modules folder. Modules are important in Ansible as they are the building blocks of automation so it is important to implement a template that makes them easy to build on.
+
+**Problem**: The Template Method pattern is crucial in Ansible in order to ensure a standardized approach to defining how a module will work  while allowing personal customization for specific tasks that you need done. It allows the module to define a set of predefined steps that need to be executed in a particular order, but also provides flexibility for individual steps to be overridden or extended by specific module implementations.
+
+**Solution**: The Template Method pattern is used in Ansible modules by defining a base module class that represents the skeleton of the automation process. This base class defines a series of operations that define the flow of a module execution, including validation, task execution, and other important steps for Ansible. The base class also provides default implementations for these methods, which can be impacted by separate module subclasses to further change their behavior. By using the Template Method pattern, Ansible modules provide a constant structure for performing tasks while allowing flexibility for module creators to change specific steps as needed. This helps make the  codebase reusable, easily maintainable, and sets a standardized approach to implementing automation logic.
+
 
 ### Singleton Pattern 
 This pattern restricts instantiation of a class to a single instance, and provides a global point of access to it. Singleton was identified under `utils` where it has been implemented with the `Display` class to ensure that any part of Ansible can obtain a reference to the single instance of `Display.`
