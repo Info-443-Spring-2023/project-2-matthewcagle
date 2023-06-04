@@ -139,8 +139,11 @@ Found in multiple components, but started in ansible/lib/ansible/module/blockinf
 
 ### Singleton Pattern 
 This pattern restricts instantiation of a class to a single instance, and provides a global point of access to it. Singleton was identified under `utils` where it has been implemented with the `Display` class to ensure that any part of Ansible can obtain a reference to the single instance of `Display.`
+
 **Context**: ansible/lib/ansible/utils/singleton.py, ansible/lin/ansible/utils/display.py
+
 **Problem**: The `singleton.py` module provides a generic implementation of the Singleton Pattern which enforces that classes can only create one instance of themselves. The Singleton pattern is used in the `display.py` file to address the problem of multiple instances of the `Display` class being created and used throughout the application. The `Display` class deals with the handling the display of messages during the execution of Ansible tasks. 
+
 **Soultion**: By using the Singleton pattern, it enforces that there is only one instance of the `Display` class. This is essential as having multiple instances of the `Display` class could lead to inconsistencies and conflicts in displaying messages. With the implementation of SIngleton, Ansible can use the same instance of the `Display` class to provide a coordinated display of messages.
 
 
