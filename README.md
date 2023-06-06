@@ -130,33 +130,28 @@ In conclusion, the security of your Ansible automation can be readily increased 
 Ansible as a software tool follows a modular and decentralized architecture. Ansible is designed to be agentless, meaning it does not require a dedicated server or additional infrastructure components. It uses a client-server model where the control machine (Ansible) communicates with managed nodes using SSH or other remote management protocols. The communication happens over secure channels, and Ansible uses a push-based approach to execute tasks on the managed nodes. Ansible organizes its functionality into modules, which are units of automation that perform specific tasks. Modules can be written in various programming languages, including Python, and they contain the logic required to manage different aspects of the system, such as package management, file manipulation, and configuration. In summary, while the Ansible GitHub repository does not adhere to a specific architectural style, the Ansible tool itself follows a super modual approach.
 
 
-## Design Patterns:
-
-Found in multiple components, but started in ansible/lib/ansible/module/blockinfile.py
+## Design Patterns
 
 ### Module pattern
-The entire code is encapsulated within a Python module. The purpose of a module is to organize code in a logical way, which makes the code easier to understand and use. In the code, all functions and the main execution are encapsulated within a single script.
+**Context**: Found in multiple components, but started in `ansible/lib/ansible/module/blockinfile.py`. The entire code is encapsulated within a Python module. The purpose of a module is to organize code in a logical way, which makes the code easier to understand and use. In the code, all functions and the main execution are encapsulated within a single script.
 
-**Problem**:
-The Module Design Pattern aims to address the need for standardized and reusable components in Ansible. It solves the problem of having repetitive code for similar tasks and promotes modularity, maintainability, and code reusability. By applying this pattern, Ansible can provide a consistent and organized approach to implementing automation logic across different modules
+**Problem**: The Module Design Pattern aims to address the need for standardized and reusable components in Ansible. It solves the problem of having repetitive code for similar tasks and promotes modularity, maintainability, and code reusability. By applying this pattern, Ansible can provide a consistent and organized approach to implementing automation logic across different modules
 
-**Solution**:
-In the Ansible codebase, the Module Design Pattern is implemented by defining a base module class that acts as a template for module execution. This base class represents the skeleton of the automation process and provides a predefined set of steps that need to be executed in a particular order. The base module class typically includes methods for parameter validation, task execution, and etc.
+**Solution**: In the Ansible codebase, the Module Design Pattern is implemented by defining a base module class that acts as a template for module execution. This base class represents the skeleton of the automation process and provides a predefined set of steps that need to be executed in a particular order. The base module class typically includes methods for parameter validation, task execution, and etc.
 
 Specific modules within the ansible/lib/ansible/modules/ directory extend the base module class and implement their own functionality by overriding or extending the predefined methods. This allows individual modules to customize their behavior while adhering to the overall structure and guidelines provided by the base module class.
 
 By utilizing the Module Design Pattern, Ansible gets consistency and reusability in its codebase. This would enable developers to easily build upon existing modules and create new ones that follow the established patterns. This approach enhances maintainability and makes it easier to understand and extend the automation capabilities of Ansible.
 
-**Strategy pattern**: The use of this pattern is visible in the handling of different strategies for inserting blocks of text. Depending on whether the "insertbefore" or "insertafter" parameter is used, the script employs a different strategy for determining the position of the block.
+### Strategy pattern**: 
+**Context**: The use of this pattern is visible in the handling of different strategies for inserting blocks of text. Depending on whether the `insertbefore` or `insertafter` parameter is used, the script employs a different strategy for determining the position of the block. A declarative approach to automation, used by playbooks to express desired states and actions to be taken, lies at the heart of the Ansible design. Ansible offers a wide range of options and configuration variables, but does not explicitly implement a pluggable strategy design for task execution.
 
-Context:  A declarative approach to automation, used by playbooks to express desired states and actions to be taken, lies at the heart of the Ansible design. Ansible offers a wide range of options and configuration variables, but does not explicitly implement a pluggable strategy design for task execution.
+**Problem**: Utilizing a strategy pattern gives benefits in terms of flexibility, modularity, and extensibility as well as adaptation to different execution strategies. Even if Ansible doesn't already include a built-in version of the Strategy Pattern, it nonetheless offers a robust automation framework. Ansible provides common task execution techniques like parallel and linear execution, but it might not have all the techniques required for your use case. If you need a special execution strategy, you must either develop your own modules or plugins or make use of an existing functionality.
 
-Problem: Utilizing a strategy pattern gives benefits in terms of flexibility, modularity, and extensibility as well as adaptation to different execution strategies. Even if Ansible doesn't already include a built-in version of the Strategy Pattern, it nonetheless offers a robust automation framework. Ansible provides common task execution techniques like parallel and linear execution, but it might not have all the techniques required for your use case. If you need a special execution strategy, you must either develop your own modules or plugins or make use of an existing functionality.
-
-Solution: Ansible allows for the flexibility and customization to its design. Ansible gives you the ability to achieve alternate execution methods or behaviors by utilizing a variety of features. You can create your own modules and plugins to expand Ansible's functionality. You can implement particular behaviors or execution methodologies that are appropriate for your goals by developing bespoke modules. These modules may be called by playbooks to achieve the desired execution logic.
+**Solution**: Ansible allows for the flexibility and customization to its design. Ansible gives you the ability to achieve alternate execution methods or behaviors by utilizing a variety of features. You can create your own modules and plugins to expand Ansible's functionality. You can implement particular behaviors or execution methodologies that are appropriate for your goals by developing bespoke modules. These modules may be called by playbooks to achieve the desired execution logic.
 
 ### Template Method Pattern
-**Context**: ansible/lib/ansible/modules/template.py
+**Context**: `ansible/lib/ansible/modules/template.py`
 The main() function acts as a template method. This design pattern defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. In the Ansible code, the main function sets up some parameters and the flow of execution, but the specific behavior is implemented in helper functions like write_changes and check_file_attrs. This is true in the majority of components in the modules folder. Modules are important in Ansible as they are the building blocks of automation so it is important to implement a template that makes them easy to build on.
 
 **Problem**: The Template Method pattern is crucial in Ansible in order to ensure a standardized approach to defining how a module will work  while allowing personal customization for specific tasks that you need done. It allows the module to define a set of predefined steps that need to be executed in a particular order, but also provides flexibility for individual steps to be overridden or extended by specific module implementations.
@@ -165,15 +160,12 @@ The main() function acts as a template method. This design pattern defines the p
 
 
 ### Singleton Pattern 
+**Context**: `ansible/lib/ansible/utils/singleton.py`, `ansible/lin/ansible/utils/display.py`
 This pattern restricts instantiation of a class to a single instance, and provides a global point of access to it. Singleton was identified under `utils` where it has been implemented with the `Display` class to ensure that any part of Ansible can obtain a reference to the single instance of `Display.`
-
-**Context**: ansible/lib/ansible/utils/singleton.py, ansible/lin/ansible/utils/display.py
 
 **Problem**: The `singleton.py` module provides a generic implementation of the Singleton Pattern which enforces that classes can only create one instance of themselves. The Singleton pattern is used in the `display.py` file to address the problem of multiple instances of the `Display` class being created and used throughout the application. The `Display` class deals with the handling the display of messages during the execution of Ansible tasks. 
 
-**Soltion**: By using the Singleton pattern, it enforces that there is only one instance of the `Display` class. This is essential as having multiple instances of the `Display` class could lead to inconsistencies and conflicts in displaying messages. With the implementation of SIngleton, Ansible can use the same instance of the `Display` class to provide a coordinated display of messages.
-
-
+**Solution**: By using the Singleton pattern, it enforces that there is only one instance of the `Display` class. This is essential as having multiple instances of the `Display` class could lead to inconsistencies and conflicts in displaying messages. With the implementation of SIngleton, Ansible can use the same instance of the `Display` class to provide a coordinated display of messages.
 
 # Architectural Assessment 
 ## 1. Separation of Concerns
@@ -196,12 +188,10 @@ Each package is then further broken up into modules based on different concerns 
 Ansible is broken up into distinct categories and maintains high cohesion so the the system is easier to maintain and improve. At a higher level Ansible is able to follow this principle but when analyzing at a code-level of abstraction it fails to adhere to this principle. In the AIXHardware class, it does have different methods for retrieving facts such as `get_cpu_facts`, `get_memory_facts`, and `get_dmi_facts`. But in the `populate` method it then combines the results from these methods into `hardware_facts.` To achieve separation of concerns would be better to further break up the code so that each is retrieving a specific type of hardware information. 
 
 ## 2. Single Responsibility Principle
-
 The Single Responsibility Principle is a fundamental concept in software engineering that focuses on the idea that a class or module should have only one reason to change. In other words, a software component should have a single responsibility or purpose. Ansible’s architecture follows this principle in a few different ways in order to keep a cohesive and effective codebase that keeps a low level of coupling within the different modules. One of the main ways the SRP is followed by Ansible is their usage of a highly modular software architecture style. Each of these standalone units is aptly named and responsible for performing a specific task such as managing packages, manipulating files, or configuring services. Each module follows this principle by maintaining a clear and singular focus on one aspect of usage. Another way in which Ansible adheres to the SRP is through its usage of roles. Roles are all about allowing users to easily organize reusable, modular sets of tasks and configurations that can be used for a variety of automation based uses. This aspect of Ansible promotes the SRP by allowing users to create units of functionality that have one specific purpose when it comes to automation. Another way in which Ansible adheres to the SRP is through its usage of playbooks. Playbooks in Ansible are used as a high level abstraction in order to define the state of the system that the user wants to change. These playbooks consist of a series of “plays”, which are made up of tasks that execute modules on hosts of the users choosing, further showing the power of Ansible as a codebase. This relates to the SRP as it shows that Ansible is dedicated to maintaining a clear distinction of responsibilities within the different aspects of their system. These are just some of the ways in which Ansible follows the SRP to their advantage. All of the different core components mentioned above have well-defined roles and boundaries within the greater scheme of the codebase and this in turn allows Ansible to maximize it’s maintainability, extensibility, and the ability to manage all of these complex automation requests with ease.
 
 
 ## 3. Principle of Least Knowledge (Law of Demeter):
-
 The Principle of Least Knowledge, or the Law of Demeter, is a principle that promotes loose coupling in various software applications and architectures. According to this principle, an object should only communicate with its immediate neighbors and should not have knowledge about the inner workings of the encapsulated objects. We can see Ansible complies with this principle, because Ansible’s architecture largely abides through thee use of modules and its agentless nature. Ansible sends modules to the node machines but does not need to know the specific implementation details of these modules. All it needs to know is the overall interface, which is how to send them information and what output to expect. This means the internals of the modules and components remain encapsulated and the changes within them do not directly affect each other, and the control machine. Overall, this program largely adheres to the Principle of Least Knowledge, helping maintain low coupling and increasing maintainability. 
 
 ## 4. Open-Closed Principle:
