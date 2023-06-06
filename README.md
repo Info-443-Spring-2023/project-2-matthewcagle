@@ -7,7 +7,7 @@
 Ansible is a cross-platform tool for resource provisioning automation that can be used in combination with DevOps to make complex tasks easier to manage. A few of the tasks it can automate includes installing software, provisioning infrastructure, improving security and compliance and sharing automation.
 
 ## Software Creators:
-Created by Michael Dehann and it was later acquired by Red Hat in 2015. Red Hat continues to maintain Ansible and is a fairly mid sized company with approximately 19,000 employees. There are currently contributions from 5,000 users and there ongoing commits being made to the repository.
+Created by Michael Dehann and it was later acquired by Red Hat in 2015. Red Hat continues to maintain Ansible and is a fairly mid sized company with approximately 19,000 employees. There are currently contributions from 5,000 users with ongoing commits being made to the repository.
 
 ## More information 
 [Official Github](https://github.com/ansible/ansible/tree/devel) |
@@ -132,7 +132,7 @@ Ansible as a software tool follows a modular and decentralized architecture. Ans
 
 ## Design Patterns
 
-### Module pattern
+### Module Pattern
 **Context**: Found in multiple components, but started in `ansible/lib/ansible/module/blockinfile.py`. The entire code is encapsulated within a Python module. The purpose of a module is to organize code in a logical way, which makes the code easier to understand and use. In the code, all functions and the main execution are encapsulated within a single script.
 
 **Problem**: The Module Design Pattern aims to address the need for standardized and reusable components in Ansible. It solves the problem of having repetitive code for similar tasks and promotes modularity, maintainability, and code reusability. By applying this pattern, Ansible can provide a consistent and organized approach to implementing automation logic across different modules
@@ -143,7 +143,7 @@ Specific modules within the ansible/lib/ansible/modules/ directory extend the ba
 
 By utilizing the Module Design Pattern, Ansible gets consistency and reusability in its codebase. This would enable developers to easily build upon existing modules and create new ones that follow the established patterns. This approach enhances maintainability and makes it easier to understand and extend the automation capabilities of Ansible.
 
-### Strategy pattern**: 
+### Strategy Pattern: 
 **Context**: The use of this pattern is visible in the handling of different strategies for inserting blocks of text. Depending on whether the `insertbefore` or `insertafter` parameter is used, the script employs a different strategy for determining the position of the block. A declarative approach to automation, used by playbooks to express desired states and actions to be taken, lies at the heart of the Ansible design. Ansible offers a wide range of options and configuration variables, but does not explicitly implement a pluggable strategy design for task execution.
 
 **Problem**: Utilizing a strategy pattern gives benefits in terms of flexibility, modularity, and extensibility as well as adaptation to different execution strategies. Even if Ansible doesn't already include a built-in version of the Strategy Pattern, it nonetheless offers a robust automation framework. Ansible provides common task execution techniques like parallel and linear execution, but it might not have all the techniques required for your use case. If you need a special execution strategy, you must either develop your own modules or plugins or make use of an existing functionality.
@@ -161,6 +161,7 @@ The main() function acts as a template method. This design pattern defines the p
 
 ### Singleton Pattern 
 **Context**: `ansible/lib/ansible/utils/singleton.py`, `ansible/lin/ansible/utils/display.py`
+
 This pattern restricts instantiation of a class to a single instance, and provides a global point of access to it. Singleton was identified under `utils` where it has been implemented with the `Display` class to ensure that any part of Ansible can obtain a reference to the single instance of `Display.`
 
 **Problem**: The `singleton.py` module provides a generic implementation of the Singleton Pattern which enforces that classes can only create one instance of themselves. The Singleton pattern is used in the `display.py` file to address the problem of multiple instances of the `Display` class being created and used throughout the application. The `Display` class deals with the handling the display of messages during the execution of Ansible tasks. 
